@@ -1,0 +1,5 @@
+kernel izos/zImage.tns
+dtb izos/dtb.tns
+initrd izos/initrd.tns
+cmdline root=/dev/ram
+boot
