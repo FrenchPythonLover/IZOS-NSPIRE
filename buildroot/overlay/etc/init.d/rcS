@@ -5,6 +5,10 @@
 #
 
 # IZOS-NSPIRE: Boot splash
+## Load appropriate font
+echo "Loading font...."
+busybox loadfont < /etc/consolefont.psf # Cyr_a8x14.psf
+
 /usr/bin/psplash &
 
 exec >/dev/null 2>&1

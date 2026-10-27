@@ -2,19 +2,12 @@
 # Shell configuration file
 # By @FrenchPythonLover
 
-## Custom prompt
+
 
 export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
 
-if [ "$PS1" ]; then
-        if [ "`id -u`" -eq 0 ]; then
-                export PS1='\[\e[32m\]\u@\h:\[\e[34m\]\w\[\e[0m\]\# '
-
-        else
-                export PS1='\[\e[32m\]\u@\h:\[\e[34m\]\w\[\e[0m\]\$ '
-
-        fi
-fi
+## Custom prompt thats so beautiful OMG
+PS1='\[\e[38;5;226m\]\w\[\e[0m\] \[\e[38;5;39m\]%\[\e[0m\] '
 
 # Some vars
 export EDITOR='/usr/bin/nano'
@@ -26,6 +19,4 @@ for i in /etc/profile.d/*.sh ; do
         fi
 done
 unset i
-## Load appropriate font
-echo "Loading font...."
-busybox loadfont < /etc/consolefont.psf # Cyr_a8x14.psf
+
