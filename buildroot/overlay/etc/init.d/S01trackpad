@@ -1,0 +1,3 @@
+#!/bin/sh
+## IZOS-NSPIRE: Enable trackpad support
+echo synaptics_i2c 0x20 > /sys/bus/i2c/devices/i2c-0/new_device

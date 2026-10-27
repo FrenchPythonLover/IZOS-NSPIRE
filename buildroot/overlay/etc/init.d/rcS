@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+# Start all init scripts in /etc/init.d
+# executing them in numerical order.
+#
+
+# IZOS-NSPIRE: Boot splash
+/usr/bin/psplash &
+
+exec >/dev/null 2>&1
+
+for i in /etc/init.d/S??*; do
+        [ ! -f "$i" ] && continue
+
+        # Strip path and sequence number (e.g., "/etc/init.d/S40network" -> "network")
+        SCRIPT_NAME=$(basename "$i" | sed 's/^S[0-9][0-9]//')
+
+        # Update psplash with the current service name
+        if [ -x /usr/bin/psplash-write ]; then
+                psplash-write "MSG Starting $SCRIPT_NAME..."
+        fi
+
+        case "$i" in
+                *.sh)
+                        # Source shell script for speed.
+                        (
+                                trap - INT QUIT TSTP
+                                set start
+                                # shellcheck source=/dev/null
+                                . "$i"
+                        )
+                        ;;
+                *)
+                        # No sh extension, so fork subprocess.
+                        "$i" start
+                        
+                        ;;
+        esac
+done
+# stop splash
+if [ -x /usr/bin/psplash-write ]; then
+        psplash-write "QUIT"
+fi
+
+# run UI
+/usr/bin/ui

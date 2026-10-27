@@ -7,3 +7,4 @@ buildroot/output
 buildroot/toolchain
 buildroot/dl
 ## todo: add all build artifacts from buildroot.
+calc/initrd.tns

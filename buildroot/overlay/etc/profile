@@ -1,0 +1,31 @@
+# IZOS-NSPIRE
+# Shell configuration file
+# By @FrenchPythonLover
+
+## Custom prompt
+
+export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
+
+if [ "$PS1" ]; then
+        if [ "`id -u`" -eq 0 ]; then
+                export PS1='\[\e[32m\]\u@\h:\[\e[34m\]\w\[\e[0m\]\# '
+
+        else
+                export PS1='\[\e[32m\]\u@\h:\[\e[34m\]\w\[\e[0m\]\$ '
+
+        fi
+fi
+
+# Some vars
+export EDITOR='/usr/bin/nano'
+
+# Run scripts on /etc/profile.d if any
+for i in /etc/profile.d/*.sh ; do
+        if [ -r "$i" ]; then
+                . $i
+        fi
+done
+unset i
+## Load appropriate font
+echo "Loading font...."
+busybox loadfont < /etc/consolefont.psf # Cyr_a8x14.psf
